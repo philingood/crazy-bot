@@ -1,9 +1,7 @@
 from aiogram import Router, F
 from aiogram.filters import Command
 from aiogram.types import Message, ReplyKeyboardRemove, CallbackQuery, InlineKeyboardButton
-
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-
 from random import randint
 
 router = Router()

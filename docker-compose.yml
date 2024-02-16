@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: python:3.12
+    volumes:
+      - ./data:/data
+    command: sh -c "echo 'SQLite container is running...'; sleep infinity"
