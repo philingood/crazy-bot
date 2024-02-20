@@ -7,4 +7,4 @@ cd crazy-vpn-bot/
 rm -rf .git/
 vim .env
 
-docker compose up --build -d
+docker compose up bot --build -d
