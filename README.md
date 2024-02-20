@@ -3,14 +3,12 @@
 Requirements: docker
 
 ## installing
-### Start bot by one command in docker
+### Build bot by one command in docker
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/philingood/crazy-vpn-bot/main/start-bot.sh)"
 ```
 
-### superhard
-Clone repo
+### Use preduild docker image
 ```bash
-git clone https://github.com/philingood/crazy-vpn-bot.git
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/philingood/crazy-vpn-bot/main/start-bot-prebuild.sh)"
 ```
-Start bot in docker
