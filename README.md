@@ -8,7 +8,7 @@ Requirements: docker
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/philingood/crazy-vpn-bot/main/start-bot.sh)"
 ```
 
-### Use preduild docker image
+### Use prebuild docker image
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/philingood/crazy-vpn-bot/main/start-bot-prebuild.sh)"
 ```
