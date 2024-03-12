@@ -3,20 +3,33 @@ from aiogram.filters import Command
 from aiogram.types import Message, ReplyKeyboardRemove, CallbackQuery, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from random import randint
+import docker
+import config
 
+client = docker.from_env()
 router = Router()
+
+ADMIN_ID = config.ADMIN_ID
 
 
 @router.message(Command("start"))
 async def cmd_start(message: Message):
     await message.reply(
-        "Привет!\n Используй эти команды для общения с ботом:\n /help - справка\n /pay - оплата тарифа\n /status - статус подписки\n /random")
+        "Привет!\nИспользуй эти команды для общения с ботом:\n/help - справка\n/pay - оплата тарифа\n/status - статус подписки\n/random")
 
 
 @router.message(Command("help"))
 async def cmd_help(message: Message):
-    await message.reply(
-        "Привет!\n Используй эти команды для общения с ботом:\n /help - справка\n /pay - оплата тарифа\n /status - статус подписки\n /random")
+    registered_users = ['6872483557']
+    CHAT_ID = str(message.chat.id)
+    if CHAT_ID in ADMIN_ID:
+        await message.reply(
+            "Привет, админ!\nВот список доступных команд:\n/help - справка\n/pay - оплата тарифа\n/status - статус подписки\n/service_status - статус сервисов\n/random - генерация случайного числа")
+    elif CHAT_ID in registered_users:
+        await message.reply(
+            "Привет!\nИспользуй эти команды для общения с ботом:\n/help - справка\n/pay - оплата тарифа\n/status - статус подписки\n/service_status - статус сервисов\n/random - генерация случайного числа")
+    else:
+        await message.reply("Зарегистрируйтесь прежде чем использовать бота")
 
 
 @router.message(Command("random"))
@@ -36,3 +49,12 @@ async def cmd_random(message: Message):
 async def send_random_value(callback: CallbackQuery):
     await callback.message.answer(str(randint(1, 10)))
     await callback.answer()
+
+
+@router.message(Command("service_status"))
+async def cmd_service_status(message: Message):
+    containers = client.containers.list()
+    status_message = "Статус контейнеров:\n"
+    for container in containers:
+        status_message += f"{container.name}: {container.status}\n"
+    await message.reply(status_message)
