@@ -22,7 +22,7 @@ async def cmd_start(message: Message):
 async def cmd_help(message: Message):
     registered_users = ['6872483557']
     CHAT_ID = str(message.chat.id)
-    if CHAT_ID in ADMIN_ID:
+    if CHAT_ID == ADMIN_ID:
         await message.reply(
             "Привет, админ!\nВот список доступных команд:\n/help - справка\n/pay - оплата тарифа\n/status - статус подписки\n/service_status - статус сервисов\n/random - генерация случайного числа")
     elif CHAT_ID in registered_users:
