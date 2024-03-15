@@ -8,6 +8,14 @@ services:
     # depends_on:
     #   - db
     restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      PAY_TOKEN: ${PAY_TOKEN}
+      ADMIN_ID: ${ADMIN_ID}
+      SYSTEM_MESSAGE: ${SYSTEM_MESSAGE}
 
   # db:
   #   image: postgres

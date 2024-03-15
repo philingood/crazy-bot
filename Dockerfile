@@ -8,9 +8,6 @@ RUN pyinstaller --onefile bot.py
 
 FROM alpine:latest
 WORKDIR /app
-COPY --from=builder /app/dist/bot /app/bot
-ENV OPENAI_API_KEY ${OPENAI_API_KEY}
-ENV BOT_TOKEN ${BOT_TOKEN}
-ENV PAY_TOKEN ${PAY_TOKEN}
+COPY --from=builder /app/dist/bot .
 
 CMD ["./bot"]
