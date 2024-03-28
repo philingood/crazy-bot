@@ -1,4 +1,4 @@
-# crazy-vpn-bot
+# crazy-bot
 
 Requirements: docker
 
