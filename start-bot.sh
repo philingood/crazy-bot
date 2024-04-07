@@ -1,10 +1,9 @@
 #!/bin/sh
 
-cd /root/
-git clone https://github.com/philingood/crazy-vpn-bot.git
+git clone https://github.com/philingood/crazy-bot.git
 
-cd crazy-vpn-bot/
+cd crazy-bot/
 rm -rf .git/
 vim .env
 
-docker compose up bot --build -d
+docker compose up --build -d
