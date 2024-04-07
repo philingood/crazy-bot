@@ -1,18 +1,14 @@
 #!/bin/sh
 
-mkdir crazy-vpn-bot && cd crazy-vpn-bot
+mkdir crazy-bot && cd crazy-bot
 
 vim .env
 
-docker pull philingood/crazy-vpn-bot
+docker pull philingood/crazy-bot
 
 docker run \
-    --name crazy-vpn-bot \
+    --name crazy-bot \
     --env-file .env \
     --restart=always \
     -d \
-    philingood/crazy-vpn-bot
-
-rm .env
-cd ..
-rm -rf crazy-vpn-bot
+    philingood/crazy-bot
