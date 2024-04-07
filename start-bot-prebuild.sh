@@ -9,6 +9,6 @@ docker pull philingood/crazy-bot
 docker run \
     --name crazy-bot \
     --env-file .env \
-    --restart=always \
+    --restart=unless-stopped \
     -d \
     philingood/crazy-bot
