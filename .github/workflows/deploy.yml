@@ -45,6 +45,8 @@ jobs:
            username: ${{ secrets.SERVER_USERNAME }}
            key: ${{ secrets.SERVER_SSH_KEY }}
            passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
+           fingerprint: ${{ secrets.SSH_FINGERPREINT }}
+           envs: DOCKERHUB_USERNAME
            script: |
              sudo docker pull $DOCKERHUB_USERNAME/crazy-bot
              sudo docker stop crazy-bot || true
