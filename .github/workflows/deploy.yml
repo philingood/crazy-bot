@@ -51,5 +51,5 @@ jobs:
              sudo docker pull $DOCKERHUB_USERNAME/crazy-bot
              sudo docker stop crazy-bot || true
              sudo docker rm crazy-bot || true
-             sudo docker run --name crazy-bot --env-file /home/services/crazy-bot/.env --restart=unless-stopped -d philingood/crazy-bot
+             sudo docker run --name crazy-bot --env-file /home/services/crazy-bot/.env --restart=unless-stopped -d $DOCKERHUB_USERNAME/crazy-bot
   
