@@ -29,27 +29,22 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot:latest
           file: ./Dockerfile
-          
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
-
+    
     steps:
-       - name: Deploy to server
-         uses: appleboy/ssh-action@master
-         env:
-           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-         with:
-           host: ${{ secrets.SERVER_HOST }}
-           port: ${{ secrets.SSH_PORT }}
-           username: ${{ secrets.SERVER_USERNAME }}
-           key: ${{ secrets.SERVER_SSH_KEY }}
-           passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
-           fingerprint: ${{ secrets.SSH_FINGERPREINT }}
-           envs: DOCKERHUB_USERNAME
-           script: |
-             sudo docker pull $DOCKERHUB_USERNAME/crazy-bot
-             sudo docker stop crazy-bot || true
-             sudo docker rm crazy-bot || true
-             sudo docker run --name crazy-bot --env-file /home/services/crazy-bot/.env --restart=unless-stopped -d $DOCKERHUB_USERNAME/crazy-bot
-  
+      - uses: actions/checkout@v3
+      # Setup key  
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh"  
+      - run: echo "${{ secrets.SSH_KEY }}" > "$HOME/.ssh/key"
+      - run: chmod 60@ "$HOME/.ssh/key"
+      # Deploy
+      - run: ssh -i $HOME/.ssh/key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 'bash -s' << 'ENDSSH'
+          sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
+          sudo docker stop crazy-bot || true
+          sudo docker rm crazy-bot || true
+          sudo docker run --name crazy-bot --env-file /home/services/crazy-bot/.env --restart=unless-stopped -d ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
+          ENDSSH
