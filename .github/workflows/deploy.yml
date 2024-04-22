@@ -40,7 +40,7 @@ jobs:
       - run: set -eu
       - run: mkdir "$HOME/.ssh"  
       - run: echo "${{ secrets.SSH_KEY }}" > "$HOME/.ssh/key"
-      - run: chmod 60@ "$HOME/.ssh/key"
+      - run: chmod 600 "$HOME/.ssh/key"
       # Deploy
       - run: ssh -i $HOME/.ssh/key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 'bash -s' << 'ENDSSH'
           sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
