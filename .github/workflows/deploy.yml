@@ -36,17 +36,15 @@ jobs:
     
     steps:
       - name: Deploy to server
-        uses: appleboy/ssh-action@v1.0.3
-        env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        uses: D3rHase/ssh-command-action@{version}
         with:
-          host: ${{ secrets.HOST }}
+          host: ${{ secrets.HOST }} # Remote server address / ip - required
           port: ${{ secrets.SSH_PORT }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
-          script: |
-            sudo docker pull $DOCKERHUB_USERNAME/crazy-bot
+          user: ${{ secrets.SSH_USERNAME }}
+          private_key: ${{ secrets.SSH_KEY }}
+          host_fingerprint: ${{secrets.HOST_FINGERPRINT}} # Public ssh key fingerprint, viewable via ssh-keyscan -H $HOST -p $PORT - optional
+          command: |
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
             sudo docker stop crazy-bot || true
             sudo docker rm crazy-bot || true
-            sudo docker run --name crazy-bot --env-file /home/services/crazy-bot/.env --restart=unless-stopped -d $DOCKERHUB_USERNAME/crazy-bot
+            sudo docker run --name crazy-bot --env-file /home/services/crazy-bot/.env --restart=unless-stopped -d ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
