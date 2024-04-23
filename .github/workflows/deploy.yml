@@ -36,13 +36,13 @@ jobs:
     
     steps:
       - name: Deploy to server
-        uses: D3rHase/ssh-command-action@0.2.2
+        uses: D3rHase/ssh-command-action@v0.2.2
         with:
-          host: ${{ secrets.HOST }} # Remote server address / ip - required
+          host: ${{ secrets.HOST }}
           port: ${{ secrets.SSH_PORT }}
           user: ${{ secrets.SSH_USERNAME }}
           private_key: ${{ secrets.SSH_KEY }}
-          host_fingerprint: ${{secrets.HOST_FINGERPRINT}} # Public ssh key fingerprint, viewable via ssh-keyscan -H $HOST -p $PORT - optional
+          host_fingerprint: ${{secrets.HOST_FINGERPRINT}}
           command: |
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
             sudo docker stop crazy-bot || true
