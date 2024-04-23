@@ -42,7 +42,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           user: ${{ secrets.SSH_USERNAME }}
           private_key: ${{ secrets.SSH_KEY }}
-          host_fingerprint: ${{secrets.HOST_FINGERPRINT}}
+          host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           command: |
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
             sudo docker stop crazy-bot || true
