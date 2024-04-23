@@ -36,7 +36,7 @@ jobs:
     
     steps:
       - name: Deploy to server
-        uses: D3rHase/ssh-command-action@{version}
+        uses: D3rHase/ssh-command-action@0.2.2
         with:
           host: ${{ secrets.HOST }} # Remote server address / ip - required
           port: ${{ secrets.SSH_PORT }}
