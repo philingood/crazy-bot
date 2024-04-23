@@ -36,7 +36,7 @@ jobs:
     
     steps:
       - name: Deploy to server
-      - uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@master
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         with:
