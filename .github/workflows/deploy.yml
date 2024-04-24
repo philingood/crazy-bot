@@ -35,11 +35,18 @@ jobs:
     # needs: build
     
     steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: unnecessary
+
+      - name: Adding Known Hosts
+        run: ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      
       - name: Deploy to server
         run: |
-            echo "${{ secrets.SSH_KEY }}" > ~/id_rsa
-            echo "${{ secrets.SSH_FINGERPRINT }}" > /root/.ssh/known_hosts
-            ssh -i ~/id_rsa -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USERNAME }}@${{ secrets.HOST }} bash <<EOF
+            ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USERNAME }}@${{ secrets.HOST }} bash <<EOF
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
             sudo docker stop crazy-bot || true
             sudo docker rm crazy-bot || true
