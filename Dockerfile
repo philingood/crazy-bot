@@ -3,7 +3,7 @@ RUN apk add --no-cache binutils=2.41-r0
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY src/ .
+COPY src/ src/
 WORKDIR /app/src
 RUN pyinstaller --onefile bot.py
 
