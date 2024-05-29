@@ -17,23 +17,17 @@ permissions:
 
 jobs:
 
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Build and export to Docker
+    - name: Build Docker Image
       uses: docker/build-push-action@v5
       with:
         context: .
         load: true
         tags: ${{ env.TEST_TAG }}
-
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
     - name: Test
       run: docker run --rm ${{ env.TEST_TAG }}
