@@ -33,8 +33,8 @@ cd crazy-bot/
 docker run \
     --name crazy-bot \
     --env-file .env \
-    --restart=always \
-    -d 
+    --restart=unless-stopped \
+    -d
 ```
 
 ## Usage
