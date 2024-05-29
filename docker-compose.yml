@@ -5,29 +5,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    # depends_on:
-    #   - db
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      args:
+        - IMAGE_TAG=latest
     environment:
       BOT_TOKEN: ${BOT_TOKEN}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       PAY_TOKEN: ${PAY_TOKEN}
       ADMIN_ID: ${ADMIN_ID}
       SYSTEM_MESSAGE: ${SYSTEM_MESSAGE}
+    restart: unless-stopped
+    container_name: crazy-bot
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
-  # db:
-  #   image: postgres
-  #   user: postgres
-  #   environment:
-  #     POSTGRES_USER: ${PG_USER}
-  #     POSTGRES_PASSWORD: ${PG_PASS}
-  #     POSTGRES_DB: ${PG_DB}
-  #   healthcheck:
-  #     test: [ "CMD-SHELL", "pg_isready" ]
-  #     interval: 1s
-  #     timeout: 1s
-  #     retries: 5
-  #   ports:
-  #     - "5432:5432"

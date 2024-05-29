@@ -9,5 +9,12 @@ RUN pyinstaller --onefile bot.py
 FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /app/dist/bot .
-
 CMD ["./bot"]
+
+ARG VERSION
+ARG BUILD_DATE
+
+LABEL maintainer="philingood"
+LABEL version="1.0"
+LABEL description="Telegram bot with AI"
+LABEL image.tag="${IMAGE_TAG}"
