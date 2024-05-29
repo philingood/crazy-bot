@@ -1,12 +1,14 @@
-FROM python:3.12-alpine as builder
-RUN apk add --no-cache binutils
+FROM python:3.12-alpine3.19 as builder
+RUN apk add --no-cache binutils=2.41-r0
 WORKDIR /app
-COPY . . 
-RUN pip install --no-cache-dir aiogram python-dotenv openai pyinstaller docker
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY src/ .
+WORKDIR /app/src
 RUN pyinstaller --onefile bot.py
 
 
-FROM alpine:latest
+FROM alpine:3.19
 WORKDIR /app
 COPY --from=builder /app/dist/bot .
 CMD ["./bot"]
