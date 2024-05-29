@@ -16,29 +16,8 @@ permissions:
   contents: read
 
 jobs:
-  check_changes:
-    name: Check for Changes
-    runs-on: ubuntu-latest
-    outputs:
-      files_changed: ${{ steps.check_changes.outputs.files_changed }}
-    
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-      
-    - name: Determine if Files Changed
-      id: check_changes
-      run: |
-        if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -v '^\.github/workflows/' | grep -q '.'; then
-          echo "::set-output name=files_changed::true"
-        else
-          echo "::set-output name=files_changed::false"
-        fi
-      shell: bash
 
   build:
-    needs: check_changes
-    if: needs.check_changes.outputs.files_changed == 'true'
     runs-on: ubuntu-latest
 
     steps:
