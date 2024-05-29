@@ -10,7 +10,7 @@ RUN pyinstaller --onefile bot.py
 
 FROM alpine:3.19
 WORKDIR /app
-COPY --from=builder /app/dist/bot .
+COPY --from=builder /app/src/dist/bot .
 CMD ["./bot"]
 
 ARG VERSION
