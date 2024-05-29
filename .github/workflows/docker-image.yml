@@ -42,9 +42,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag crazy-bot:$(date +%s)
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Build and export to Docker
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        load: true
+        tags: ${{ env.TEST_TAG }}
 
   test:
     needs: build
@@ -52,4 +57,4 @@ jobs:
 
     steps:
     - name: Test
-        docker run --rm ${{ env.TEST_TAG }}
+      run: docker run --rm ${{ env.TEST_TAG }}
