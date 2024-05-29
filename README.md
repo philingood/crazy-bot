@@ -27,7 +27,14 @@ git clone https://github.com/philingood/crazy-bot.git
 cd crazy-bot/
 ```
 
-3. Edit the `.env` file to set your environment variables (BOT_TOKEN, OPENAI_API_KEY, PAY_TOKEN, ADMIN_ID, SYSTEM_MESSAGE).
+3. Edit the `.env` file to set your environment variables:
+```
+BOT_TOKEN=0123456789:ABC1DeFGHijklNMopQRsTuVWXYza_bCdeFg
+ADMIN_ID=1234567
+OPENAI_API_KEY=sk-...
+SYSTEM_MESSAGE=""
+```
+
 4. Build and run the Docker container:
 ```bash
 docker run \
