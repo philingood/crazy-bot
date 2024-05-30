@@ -30,4 +30,9 @@ jobs:
         load: true
         tags: ${{ env.TEST_TAG }}
     - name: Test
-      run: docker run --rm ${{ env.TEST_TAG }}
+      run: |
+        docker run \
+        --rm \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        ${{ env.TEST_TAG }} \
+
