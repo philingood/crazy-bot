@@ -29,19 +29,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Create .env file
-        run: |
-          echo "BOT_TOKEN_TEST=${{ secrets.BOT_TOKEN }}" > .env
-          echo "ADMIN_ID=${{ secrets.ADMIN_ID }}" >> .env
-          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
-        shell: bash
-
       - name: Build and export to Docker
         uses: docker/build-push-action@v5
         with:
           context: .
           load: true
           tags: ${{ env.TEST_TAG }}
+
+      - name: Create .env file
+        run: |
+          echo "BOT_TOKEN_TEST=${{ secrets.BOT_TOKEN }}" > .env
+          echo "ADMIN_ID=${{ secrets.ADMIN_ID }}" >> .env
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+        shell: bash
 
       - name: Test
         run: |
