@@ -41,7 +41,8 @@ docker run \
     --name crazy-bot \
     --env-file .env \
     --restart=unless-stopped \
-    -d
+    -d \
+    crazy-bot
 ```
 
 ## Usage
