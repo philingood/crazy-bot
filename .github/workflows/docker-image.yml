@@ -25,17 +25,10 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Create .env file
-      # run: |
-      #   echo "BOT_TOKEN_TEST=${{ secrets.BOT_TOKEN }}" > .env
-      #   echo "ADMIN_ID=${{ secrets.ADMIN_ID }}" >> .env
-      #   echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
-      #   echo "OPENAI_SYSTEM_MESSAGE=${{ secrets.SYSTEM_MESSAGE }}" >> .env
       run: |
-        printf "BOT_TOKEN_TEST=%s\nADMIN_ID=%s\nOPENAI_API_KEY=%s\nSYSTEM_MESSAGE=%s\n" \
-        "${{ secrets.BOT_TOKEN }}" \
-        "${{ secrets.ADMIN_ID }}" \
-        "${{ secrets.OPENAI_API_KEY }}" \
-        "${{ secrets.SYSTEM_MESSAGE }}" > .env
+        echo "BOT_TOKEN_TEST=${{ secrets.BOT_TOKEN }}" > .env
+        echo "ADMIN_ID=${{ secrets.ADMIN_ID }}" >> .env
+        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
       shell: bash
 
     - name: Build Docker Image

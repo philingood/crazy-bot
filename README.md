@@ -43,6 +43,7 @@ docker run \
     --restart=unless-stopped \
     -d \
     crazy-bot
+
 ```
 
 ## Usage
