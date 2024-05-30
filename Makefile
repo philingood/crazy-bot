@@ -32,3 +32,12 @@ local: build cmd
 .PHONY: run
 run:
 	python src/bot.py
+
+.PHONY: test_mode
+test_mode: docker_build
+	docker run \
+		--name $(CONTAINER_NAME) \
+		--env-file .env \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-d \
+		$(DOCKER_IMAGE_NAME)
