@@ -79,5 +79,5 @@ jobs:
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
             sudo docker stop crazy-bot || true
             sudo docker rm crazy-bot || true
-            sudo docker run --name crazy-bot --env-file ~/services/crazy-bot/.env --restart=unless-stopped -d ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
+            sudo docker run --name crazy-bot --env-file ~/services/crazy-bot/.env --restart=unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -d ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
             EOF
