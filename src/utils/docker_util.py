@@ -17,6 +17,3 @@ async def stop_docker_container():
     container.update(restart_policy={"Name": "no"})
 
     raise SystemExit(0)
-
-    # container.stop()
-    # container.remove()
