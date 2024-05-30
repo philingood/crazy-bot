@@ -6,7 +6,7 @@ import config
 router = Router()
 
 client = AsyncOpenAI(api_key=config.OPENAI_API_KEY)
-SYSTEM_MESSAGE = config.SYSTEM_MESSAGE
+OPENAI_SYSTEM_MESSAGE = config.OPENAI_SYSTEM_MESSAGE
 
 
 async def ask_gpt(question):
@@ -14,7 +14,7 @@ async def ask_gpt(question):
         messages=[
             {
                 "role": "system",
-                "content": SYSTEM_MESSAGE
+                "content": OPENAI_SYSTEM_MESSAGE
             },
             {
                 "role": "user",

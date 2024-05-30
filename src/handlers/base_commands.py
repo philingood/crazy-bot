@@ -1,33 +1,36 @@
 from aiogram import Router, F
 from aiogram.filters import Command
-from aiogram.types import Message, ReplyKeyboardRemove, CallbackQuery, InlineKeyboardButton
+from aiogram.types import Message, CallbackQuery, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from random import randint
-import docker
+from docker import from_env
 import config
 
-client = docker.from_env()
+client = from_env()
 router = Router()
 
-ADMIN_ID = config.ADMIN_ID
+ADMIN_ID: str = str(config.ADMIN_ID)
 
 
 @router.message(Command("start"))
 async def cmd_start(message: Message):
     await message.reply(
-        "Привет!\nИспользуй эти команды для общения с ботом:\n/help - справка\n/pay - оплата тарифа\n/status - статус подписки\n/random")
+        "Привет!\nИспользуй эти команды для общения с ботом:\n/help - справка\n/pay - оплата тарифа\n/status - статус подписки\n/random"
+    )
 
 
 @router.message(Command("help"))
 async def cmd_help(message: Message):
-    registered_users = ['6872483557']
+    registered_users = ["6872483557"]
     CHAT_ID = str(message.chat.id)
     if CHAT_ID == ADMIN_ID:
         await message.reply(
-            "Привет, админ!\nВот список доступных команд:\n/help - справка\n/pay - оплата тарифа\n/status - статус подписки\n/service_status - статус сервисов\n/random - генерация случайного числа")
+            "Привет, админ!\nВот список доступных команд:\n/help - справка\n/pay - оплата тарифа\n/status - статус подписки\n/service_status - статус сервисов\n/random - генерация случайного числа"
+        )
     elif CHAT_ID in registered_users:
         await message.reply(
-            "Привет!\nИспользуй эти команды для общения с ботом:\n/help - справка\n/pay - оплата тарифа\n/status - статус подписки\n/service_status - статус сервисов\n/random - генерация случайного числа")
+            "Привет!\nИспользуй эти команды для общения с ботом:\n/help - справка\n/pay - оплата тарифа\n/status - статус подписки\n/service_status - статус сервисов\n/random - генерация случайного числа"
+        )
     else:
         await message.reply("Зарегистрируйтесь прежде чем использовать бота")
 
@@ -35,13 +38,10 @@ async def cmd_help(message: Message):
 @router.message(Command("random"))
 async def cmd_random(message: Message):
     builder = InlineKeyboardBuilder()
-    builder.add(InlineKeyboardButton(
-        text="Нажми меня",
-        callback_data="random_value")
-    )
+    builder.add(InlineKeyboardButton(text="Нажми меня", callback_data="random_value"))
     await message.answer(
         "Нажмите на кнопку, чтобы бот отправил число от 1 до 10",
-        reply_markup=builder.as_markup()
+        reply_markup=builder.as_markup(),
     )
 
 

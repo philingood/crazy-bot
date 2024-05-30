@@ -2,18 +2,11 @@ version: '3'
 
 services:
   bot:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        - IMAGE_TAG=latest
-    environment:
-      BOT_TOKEN: ${BOT_TOKEN}
-      OPENAI_API_KEY: ${OPENAI_API_KEY}
-      PAY_TOKEN: ${PAY_TOKEN}
-      ADMIN_ID: ${ADMIN_ID}
-      SYSTEM_MESSAGE: ${SYSTEM_MESSAGE}
+    image: philingood/crazy-bot
     restart: unless-stopped
+    env_file:
+      - ./.env
+    hostname: crazy-bot
     container_name: crazy-bot
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

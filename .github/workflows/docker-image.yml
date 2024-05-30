@@ -23,16 +23,27 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+
+    - name: Create .env file
+      run: |
+        echo "BOT_TOKEN_TEST=${{ secrets.BOT_TOKEN }}" > .env
+        echo "ADMIN_ID=${{ secrets.ADMIN_ID }}" >> .env
+        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+        echo "SYSTEM_MESSAGE=${{ secrets.SYSTEM_MESSAGE }}" >> .env
+      shell: bash
+
     - name: Build Docker Image
       uses: docker/build-push-action@v5
       with:
         context: .
         load: true
         tags: ${{ env.TEST_TAG }}
+
     - name: Test
       run: |
         docker run \
         --rm \
         -v /var/run/docker.sock:/var/run/docker.sock \
+        --env-file .env \
         ${{ env.TEST_TAG }} \
 

@@ -32,7 +32,7 @@ cd crazy-bot/
 BOT_TOKEN=0123456789:ABC1DeFGHijklNMopQRsTuVWXYza_bCdeFg
 ADMIN_ID=1234567
 OPENAI_API_KEY=sk-...
-SYSTEM_MESSAGE=""
+OPENAI_SYSTEM_MESSAGE=""
 ```
 
 4. Build and run the Docker container:
