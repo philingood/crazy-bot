@@ -15,5 +15,8 @@ async def stop_docker_container():
     container = client.containers.get(container_name)
 
     container.update(restart_policy={"Name": "no"})
-    container.stop()
-    container.remove()
+
+    raise SystemExit(0)
+
+    # container.stop()
+    # container.remove()
