@@ -36,6 +36,13 @@ jobs:
           load: true
           tags: ${{ env.TEST_TAG }}
 
+      - name: Create .env file
+        run: |
+          echo "BOT_TOKEN_TEST=${{ secrets.BOT_TOKEN }}" > .env
+          echo "ADMIN_ID=${{ secrets.ADMIN_ID }}" >> .env
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+        shell: bash
+
       - name: Test
         run: |
           docker run \
@@ -48,7 +55,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ${{ env.LATEST_TAG }}
 
@@ -72,5 +79,5 @@ jobs:
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
             sudo docker stop crazy-bot || true
             sudo docker rm crazy-bot || true
-            sudo docker run --name crazy-bot --env-file ~/services/crazy-bot/.env --restart=unless-stopped -d ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
+            sudo docker run --name crazy-bot --env-file ~/services/crazy-bot/.env --restart=unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -d ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot
             EOF
