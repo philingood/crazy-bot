@@ -4,3 +4,5 @@ g4f
 python-dotenv==1.0.1
 pyinstaller
 docker
+pytest
+pytest-asyncio
