@@ -1,7 +1,10 @@
+import logging
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
 from handlers.ask_gpt import ask_gpt
+
+logger = logging.getLogger(__name__)
 
 
 class TestAskGpt(unittest.TestCase):
@@ -14,8 +17,8 @@ class TestAskGpt(unittest.TestCase):
         )
 
         response = ask_gpt(client=MockClient())
-
         self.assertEqual(response, "Hello response")
+
         mock_create.assert_called_once_with(
             model="gpt-3.5-turbo",
             messages=[
