@@ -32,6 +32,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Create .env file
+      run: |
+        echo "BOT_TOKEN_TEST=${{ secrets.BOT_TOKEN }}" > .env
+        echo "ADMIN_ID=${{ secrets.ADMIN_ID }}" >> .env
+        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+      shell: bash
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
