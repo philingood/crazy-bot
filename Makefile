@@ -38,7 +38,7 @@ test:
 	PYTHONPATH=src pytest -m required -v
 
 .PHONY: test_mode
-test_mode: docker_build
+test_mode: docker_stop docker_build
 	docker run \
 		--name $(CONTAINER_NAME) \
 		--env-file .env \
