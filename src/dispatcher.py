@@ -11,5 +11,4 @@ logging.basicConfig(
 bot = Bot(token=config.BOT_TOKEN)
 dp = Dispatcher()
 
-dp.include_routers(base_commands.router, payments.router,
-                   simple_answers.router)
+dp.include_routers(base_commands.router, payments.router, simple_answers.router)

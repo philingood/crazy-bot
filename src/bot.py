@@ -1,6 +1,7 @@
 import asyncio
-from dispatcher import dp, bot
+
 import test.test_mode as tm
+from dispatcher import bot, dp
 
 
 async def main():

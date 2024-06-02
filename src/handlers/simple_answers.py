@@ -1,5 +1,6 @@
-from aiogram import Router, F
+from aiogram import F, Router
 from aiogram.types import Message
+
 from ask_gpt import ask_g4f
 
 router = Router()

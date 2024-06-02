@@ -1,5 +1,5 @@
-from aiogram import Bot
 import config
+from aiogram import Bot
 
 
 async def notify_admin_test_mode(bot: Bot):
