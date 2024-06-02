@@ -33,6 +33,10 @@ local: build cmd
 run:
 	python src/bot.py
 
+.PHONY: test
+test:
+	PYTHONPATH=src pytest -m required -v
+
 .PHONY: test_mode
 test_mode: docker_build
 	docker run \
