@@ -1,6 +1,6 @@
 import asyncio
 
-import test.test_mode as tm
+import utils.test_mode as tm
 from dispatcher import bot, dp
 
 
