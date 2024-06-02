@@ -1,15 +1,30 @@
-from config import OPENAI_SYSTEM_MESSAGE
+from config import OPENAI_API_KEY, OPENAI_SYSTEM_MESSAGE
 from g4f.client import Client
+from openai import AsyncOpenAI
 
-SYSTEMMSG = OPENAI_SYSTEM_MESSAGE
+SYSTEMMSG = str(OPENAI_SYSTEM_MESSAGE)
 
 
-def ask_gpt(client=Client()):
+def ask_g4f(message: str, client=Client()) -> str | None:
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": SYSTEMMSG},
-            {"role": "user", "content": "Hello"},
+            {"role": "user", "content": message},
         ],
+    )
+    return response.choices[0].message.content
+
+
+async def ask_gpt(question):
+    client = AsyncOpenAI(api_key=OPENAI_API_KEY)
+    response = await client.chat.completions.create(
+        messages=[
+            {"role": "system", "content": SYSTEMMSG},
+            {"role": "user", "content": question},
+        ],
+        model="gpt-3.5-turbo",
+        max_tokens=100,
+        temperature=0.7,
     )
     return response.choices[0].message.content
