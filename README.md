@@ -1,7 +1,7 @@
 # Crazy Bot
 
 [![Deploy to Server](https://github.com/philingood/crazy-bot/actions/workflows/deploy.yml/badge.svg?branch=deploy)](https://github.com/philingood/crazy-bot/actions/workflows/deploy.yml)
-[![Docker Image CI](https://github.com/philingood/crazy-bot/actions/workflows/docker-image.yml/badge.svg)](https://github.com/philingood/crazy-bot/actions/workflows/docker-image.yml)
+[![Build and Test](https://github.com/philingood/crazy-bot/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/philingood/crazy-bot/actions/workflows/docker-image.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Crazy Bot is a Telegram bot designed to provide users with a seamless experience in managing their VPN services. It integrates with Docker to manage VPN containers and uses OpenAI's GPT-3.5 Turbo for generating responses to user queries.
