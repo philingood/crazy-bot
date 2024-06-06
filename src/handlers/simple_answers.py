@@ -9,7 +9,7 @@ router = Router()
 @router.message(F.text)
 async def message_with_text(message: Message):
     response = ask_g4f(message.text)
-    await message.reply(response)
+    await message.answer(response)
 
 
 @router.message(F.sticker)

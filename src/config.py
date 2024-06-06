@@ -11,6 +11,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
+TEST = int(os.getenv("TEST", 0))
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 BOT_TOKEN_TEST = os.getenv("BOT_TOKEN_TEST")
 ADMIN_ID = os.getenv("ADMIN_ID")
@@ -23,7 +24,8 @@ TEST_MODE = False
 if BOT_TOKEN_TEST:
     logger.info("Running in test mode")
     BOT_TOKEN = BOT_TOKEN_TEST
-    TEST_MODE = True
+    if TEST == 1:
+        TEST_MODE = True
 elif not BOT_TOKEN:
     raise ValueError("Error while reading config: BOT_TOKEN is missing")
 
