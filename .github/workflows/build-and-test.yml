@@ -3,15 +3,11 @@ name: Build and Test
 on:
   push:
     branches: [ "main" ]
-    paths-ignore:
-      - '.github/workflows/**'
-      - '*.md'
   pull_request:
     branches: [ "main" ]
 
 env:
   TEST_TAG: ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot:test
-  LATEST_TAG: ${{ secrets.DOCKERHUB_USERNAME }}/crazy-bot:latest
 
 permissions:
   contents: read
@@ -34,6 +30,7 @@ jobs:
 
     - name: Create .env file
       run: |
+        echo "TEST=1" > .env
         echo "BOT_TOKEN_TEST=${{ secrets.BOT_TOKEN }}" > .env
         echo "ADMIN_ID=${{ secrets.ADMIN_ID }}" >> .env
         echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
@@ -62,6 +59,7 @@ jobs:
 
     - name: Create .env file
       run: |
+        echo "TEST=1" > .env
         echo "BOT_TOKEN_TEST=${{ secrets.BOT_TOKEN }}" > .env
         echo "ADMIN_ID=${{ secrets.ADMIN_ID }}" >> .env
         echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
