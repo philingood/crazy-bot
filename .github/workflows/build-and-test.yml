@@ -31,7 +31,7 @@ jobs:
     - name: Create .env file
       run: |
         echo "TEST=1" > .env
-        echo "BOT_TOKEN_TEST=${{ secrets.BOT_TOKEN }}" > .env
+        echo "BOT_TOKEN_TEST=${{ secrets.BOT_TOKEN }}" >> .env
         echo "ADMIN_ID=${{ secrets.ADMIN_ID }}" >> .env
         echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
       shell: bash
@@ -60,7 +60,7 @@ jobs:
     - name: Create .env file
       run: |
         echo "TEST=1" > .env
-        echo "BOT_TOKEN_TEST=${{ secrets.BOT_TOKEN }}" > .env
+        echo "BOT_TOKEN_TEST=${{ secrets.BOT_TOKEN }}" >> .env
         echo "ADMIN_ID=${{ secrets.ADMIN_ID }}" >> .env
         echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
       shell: bash
