@@ -1,5 +1,6 @@
-import docker
 import os
+
+import docker
 
 
 async def get_current_container_name():

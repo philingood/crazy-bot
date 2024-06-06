@@ -9,6 +9,8 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
+logger = logging.getLogger(__name__)
+
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 BOT_TOKEN_TEST = os.getenv("BOT_TOKEN_TEST")
 ADMIN_ID = os.getenv("ADMIN_ID")
@@ -19,7 +21,7 @@ OPENAI_SYSTEM_MESSAGE = os.getenv("OPENAI_SYSTEM_MESSAGE")
 TEST_MODE = False
 
 if BOT_TOKEN_TEST:
-    logging.info("Running in test mode")
+    logger.info("Running in test mode")
     BOT_TOKEN = BOT_TOKEN_TEST
     TEST_MODE = True
 elif not BOT_TOKEN:
