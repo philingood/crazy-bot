@@ -13,7 +13,12 @@ def ask_g4f(message: str, client=Client()) -> str | None:
             {"role": "user", "content": message},
         ],
     )
-    return response.choices[0].message.content
+    if response.choices[0].message.content:
+        if "sorry," in response.choices[0].message.content:
+            return "Мне нечего сказать…"
+        else:
+            return response.choices[0].message.content
+    return "Мне нечего сказать…"
 
 
 async def ask_gpt(question):
