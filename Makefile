@@ -1,6 +1,7 @@
 DOCKER_IMAGE_NAME = philingood/crazy-bot
 DOCKERFILE_PATH = ./Dockerfile
 CONTAINER_NAME = crazy-bot
+ENV_FILE = .env
 
 .PHONY: docker_build docker_run docker
 docker_build:
@@ -41,7 +42,7 @@ test:
 test_mode: docker_stop docker_build
 	docker run \
 		--name $(CONTAINER_NAME) \
-		--env-file .env \
+		--env-file $(ENV_FILE) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-d \
 		$(DOCKER_IMAGE_NAME)
