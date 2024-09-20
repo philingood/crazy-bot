@@ -2,7 +2,7 @@ FROM python:3.12-alpine3.19 as builder
 RUN apk add --no-cache binutils=2.41-r0 docker-cli=25.0.5-r1
 WORKDIR /app
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt -q
 COPY src/ src/
 WORKDIR /app/src
 RUN pyinstaller --onefile bot.py
