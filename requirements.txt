@@ -1,6 +1,7 @@
 aiogram
 openai
 g4f
+curl_cffi
 nest-asyncio
 python-dotenv
 pyinstaller
