@@ -1,4 +1,9 @@
 import sqlite3
+import logging
+
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 
 try:
     from config import DATABASE_FILE
@@ -10,10 +15,10 @@ except ImportError:
 def connect_to_db(db_path):
     try:
         conn = sqlite3.connect(db_path)
-        print("Подключение к базе данных прошло успешно")
+        logging.info("Подключение к базе данных прошло успешно")
         return conn
     except sqlite3.Error as e:
-        print(f"Ошибка подключения к базе данных: {e}")
+        logging.error(f"Ошибка подключения к базе данных: {e}")
         return None
 
 
@@ -23,9 +28,9 @@ def get_client_traffics(conn):
         cursor.execute("SELECT * FROM client_traffics")
         rows = cursor.fetchall()
         for row in rows:
-            print(row)
+            logging.info(row)
     except sqlite3.Error as e:
-        print(f"Ошибка выполнения запроса: {e}")
+        logging.error(f"Ошибка выполнения запроса: {e}")
 
 
 def get_users(conn):
@@ -34,9 +39,9 @@ def get_users(conn):
         cursor.execute("SELECT id, username FROM users")
         rows = cursor.fetchall()
         for row in rows:
-            print(row)
+            logging.info(row)
     except sqlite3.Error as e:
-        print(f"Ошибка выполнения запроса: {e}")
+        logging.error(f"Ошибка выполнения запроса: {e}")
 
 
 def main():
