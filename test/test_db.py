@@ -28,17 +28,15 @@ def test_connect_to_db():
     conn.close()
 
 
-def test_get_client_traffics(conn, caplog):
+def test_get_client_traffics(conn):
     """Тестируем получение трафика клиентов."""
-    with caplog.at_level("INFO"):
-        get_client_traffics(conn)
+    result = get_client_traffics(conn)
 
-    assert any("500" in message for message in caplog.text.splitlines())
+    assert result == [(1, 500)]  # Ожидаемый результат
 
 
-def test_get_users(conn, caplog):
+def test_get_users(conn):
     """Тестируем получение пользователей."""
-    with caplog.at_level("INFO"):
-        get_users(conn)
+    result = get_users(conn)
 
-    assert any("test_user" in message for message in caplog.text.splitlines())
+    assert result == [(1, "test_user")]  # Ожидаемый результат

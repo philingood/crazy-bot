@@ -1,9 +1,6 @@
 import sqlite3
-import logging
+from config import logger
 
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
 
 try:
     from config import DATABASE_FILE
@@ -15,10 +12,10 @@ except ImportError:
 def connect_to_db(db_path):
     try:
         conn = sqlite3.connect(db_path)
-        logging.info("Подключение к базе данных прошло успешно")
+        logger.info("Подключение к базе данных прошло успешно")
         return conn
     except sqlite3.Error as e:
-        logging.error(f"Ошибка подключения к базе данных: {e}")
+        logger.error(f"Ошибка подключения к базе данных: {e}")
         return None
 
 
@@ -27,10 +24,9 @@ def get_client_traffics(conn):
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM client_traffics")
         rows = cursor.fetchall()
-        for row in rows:
-            logging.info(row)
+        return rows
     except sqlite3.Error as e:
-        logging.error(f"Ошибка выполнения запроса: {e}")
+        logger.error(f"Ошибка выполнения запроса: {e}")
 
 
 def get_users(conn):
@@ -38,10 +34,9 @@ def get_users(conn):
         cursor = conn.cursor()
         cursor.execute("SELECT id, username FROM users")
         rows = cursor.fetchall()
-        for row in rows:
-            logging.info(row)
+        return rows
     except sqlite3.Error as e:
-        logging.error(f"Ошибка выполнения запроса: {e}")
+        logger.error(f"Ошибка выполнения запроса: {e}")
 
 
 def main():
@@ -49,7 +44,7 @@ def main():
     conn = connect_to_db(db_path)
 
     if conn:
-        get_client_traffics(conn)
+        print(get_client_traffics(conn))
         get_users(conn)
         conn.close()
 

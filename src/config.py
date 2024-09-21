@@ -1,12 +1,23 @@
 import logging
 import os
-
+import argparse
 from dotenv import load_dotenv
 
 load_dotenv()
 
+parser = argparse.ArgumentParser(description="Настройки бота")
+parser.add_argument(
+    "--log-level",
+    default="INFO",
+    choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+    help="Уровень логирования (по умолчанию: INFO)",
+)
+args = parser.parse_args()
+
+log_level = getattr(logging, args.log_level.upper(), logging.INFO)
+
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    level=log_level, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
 logger = logging.getLogger(__name__)
