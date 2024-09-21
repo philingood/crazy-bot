@@ -36,7 +36,7 @@ run:
 
 .PHONY: test
 test:
-	PYTHONPATH=src pytest -m required -v
+	PYTHONPATH=src pytest -v
 
 .PHONY: test_mode
 test_mode: docker_stop docker_build
