@@ -26,7 +26,7 @@ class Inbound:
 
 
 class User:
-    def __init__(self, client_data):
+    def __init__(self, client_data: dict):
         self.id = client_data["id"]
         self.flow = client_data["flow"]
         self.email = client_data["email"]
@@ -39,4 +39,16 @@ class User:
         self.reset = client_data["reset"]
 
     def __repr__(self):
-        return f"<User(id={self.id}, email={self.email}, tg_id={self.tg_id})>"
+        desc = (
+            f"User Information:\n"
+            f"- ID: {self.id}\n"
+            f"- Email: {self.email}\n"
+            f"- Telegram ID: {self.tg_id}\n"
+            f"- Subscription ID: {self.sub_id}\n"
+            f"- Data Flow: {self.flow} GB used of {self.total_gb} GB total\n"
+            f"- IP Limit: {self.limit_ip}\n"
+            f"- Expiry Time: {self.expiry_time}\n"
+            f"- Account Status: {'Enabled' if self.enable else 'Disabled'}\n"
+            f"- Auto Reset: {'Yes' if self.reset else 'No'}\n"
+        )
+        return desc

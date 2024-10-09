@@ -12,7 +12,7 @@ class DataBase:
         except sqlite3.Error as e:
             logger.error(f"Ошибка подключения к базе данных: {e}")
 
-    def get_client_by_tgid(self, user_id):
+    def get_client_by_tgid(self, user_id) -> list | None:
         try:
             self.cursor.execute(
                 f"SELECT * FROM inbounds WHERE settings LIKE '%\"tgId\": {user_id}%';"

@@ -35,11 +35,11 @@ ADMIN_ID = os.getenv("ADMIN_ID")
 PAY_TOKEN = os.getenv("PAY_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_SYSTEM_MESSAGE = os.getenv("OPENAI_SYSTEM_MESSAGE")
-DATABASE_FILE = os.getenv("DATABASE_FILE")
+DB_FILE = os.getenv("DB_FILE")
 
 TEST_MODE = False
 
-if not DATABASE_FILE:
+if not DB_FILE:
     logger.error("Error while reading config: DATABASE_FILE is missing")
 
 if BOT_TOKEN_TEST:
