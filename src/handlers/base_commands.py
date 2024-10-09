@@ -5,9 +5,14 @@ from aiogram import F, Router
 from aiogram.filters import Command
 from aiogram.types import CallbackQuery, InlineKeyboardButton, Message
 from aiogram.utils.keyboard import InlineKeyboardBuilder
+from config import logger
 from docker import from_env
 
-client = from_env()
+try:
+    docker_client = from_env()
+except Exception as e:
+    logger.error(f"Error while connecting to docker: {e}")
+
 router = Router()
 
 ADMIN_ID: str = str(config.ADMIN_ID)
@@ -54,7 +59,7 @@ async def send_random_value(callback: CallbackQuery):
 
 @router.message(Command("service_status"))
 async def cmd_service_status(message: Message):
-    containers = client.containers.list()
+    containers = docker_client.containers.list()
     status_message = "Статус контейнеров:\n"
     for container in containers:
         status_message += f"{container.name}: {container.status}\n"

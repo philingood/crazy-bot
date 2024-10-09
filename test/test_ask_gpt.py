@@ -4,7 +4,6 @@ import pytest
 from handlers.ask_gpt import ask_g4f
 
 
-@pytest.mark.required
 @pytest.mark.parametrize("response_content", ["Hello response"])
 @patch("handlers.ask_gpt.Client")
 @patch("handlers.ask_gpt.SYSTEMMSG", "Hello, system!")
