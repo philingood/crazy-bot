@@ -1,53 +1,32 @@
 import sqlite3
 from config import logger
 
-
 try:
-    from config import DATABASE_FILE
+    from config import DATABASE_FILE as db_path
+
+    if db_path is None or "":
+        logger.error("Путь базы данных не задан! Проверьте DATABASE_FILE в .env файл!")
+        exit(1)
 except ImportError:
-    DATABASE_FILE = "/Users/booba/Downloads/x-ui.db"
-    pass
+    logger.error("Путь базы данных не задан!")
+    exit(1)
 
 
-def connect_to_db(db_path):
-    try:
-        conn = sqlite3.connect(db_path)
-        logger.info("Подключение к базе данных прошло успешно")
-        return conn
-    except sqlite3.Error as e:
-        logger.error(f"Ошибка подключения к базе данных: {e}")
-        return None
+class DataBase:
+    def __init__(self, db_path: str) -> None:
+        """Подключение к базе данных"""
+        try:
+            self.conn = sqlite3.connect(db_path)
+            self.cursor = self.conn.cursor()
+            logger.debug("Подключение к базе данных прошло успешно")
+        except sqlite3.Error as e:
+            logger.error(f"Ошибка подключения к базе данных: {e}")
 
-
-def get_client_traffics(conn):
-    try:
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM client_traffics")
-        rows = cursor.fetchall()
-        return rows
-    except sqlite3.Error as e:
-        logger.error(f"Ошибка выполнения запроса: {e}")
-
-
-def get_users(conn):
-    try:
-        cursor = conn.cursor()
-        cursor.execute("SELECT id, username FROM users")
-        rows = cursor.fetchall()
-        return rows
-    except sqlite3.Error as e:
-        logger.error(f"Ошибка выполнения запроса: {e}")
-
-
-def main():
-    db_path = DATABASE_FILE
-    conn = connect_to_db(db_path)
-
-    if conn:
-        print(get_client_traffics(conn))
-        get_users(conn)
-        conn.close()
-
-
-if __name__ == "__main__":
-    main()
+    def get_client_by_tgid(self, user_id):
+        try:
+            self.cursor.execute(
+                f"SELECT * FROM inbounds WHERE settings LIKE '%\"tgId\": {user_id}%';"
+            )
+            return self.cursor.fetchall()
+        except sqlite3.Error as e:
+            logger.error(f"Ошибка выполнения запроса: {e}")
