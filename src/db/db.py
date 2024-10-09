@@ -1,16 +1,6 @@
 import sqlite3
 from config import logger
 
-try:
-    from config import DATABASE_FILE as db_path
-
-    if db_path is None or "":
-        logger.error("Путь базы данных не задан! Проверьте DATABASE_FILE в .env файл!")
-        exit(1)
-except ImportError:
-    logger.error("Путь базы данных не задан!")
-    exit(1)
-
 
 class DataBase:
     def __init__(self, db_path: str) -> None:

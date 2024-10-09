@@ -39,6 +39,9 @@ DATABASE_FILE = os.getenv("DATABASE_FILE")
 
 TEST_MODE = False
 
+if not DATABASE_FILE:
+    logger.error("Error while reading config: DATABASE_FILE is missing")
+
 if BOT_TOKEN_TEST:
     logger.info("Running in test mode")
     BOT_TOKEN = BOT_TOKEN_TEST
